@@ -3,6 +3,8 @@ package com.foro_hub.foro_hub.domain.topico;
 import com.foro_hub.foro_hub.domain.curso.ICursoRepository;
 import com.foro_hub.foro_hub.infra.errores.ValidacionException;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Page;
+import org.springframework.data.domain.Pageable;
 import org.springframework.stereotype.Service;
 
 @Service
@@ -28,5 +30,14 @@ public class TopicoService {
         var topico = new Topico(datos, curso);
         
         return topicoRepository.save(topico);
+    }
+    
+    public Page<Topico> listarTopicosPaginados(Pageable pageable) {
+        return topicoRepository.findAll(pageable);
+    }
+    
+    public Topico obtenerTopicoPorId(Long id) {
+        return topicoRepository.findById(id)
+                .orElseThrow(() -> new ValidacionException("No se encontró el tópico con ID: " + id));
     }
 }
