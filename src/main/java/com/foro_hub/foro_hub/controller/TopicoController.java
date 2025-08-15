@@ -41,10 +41,20 @@ public class TopicoController {
     }
     
     @GetMapping("/{id}")
-    public ResponseEntity<DatosRespuestaTopicoDTO> obtenerTopicoPorId(@PathVariable Long id) {
+    public ResponseEntity obtenerTopicoPorId(@PathVariable Long id) {
 
         var topico = topicoService.obtenerTopicoPorId(id);
         var respuesta = new DatosRespuestaTopicoDTO(topico);
+
+        return ResponseEntity.ok(respuesta);
+    }
+
+    @Transactional
+    @PutMapping("/{id}")
+    public ResponseEntity actualizarTopico(@PathVariable Long id, @RequestBody @Valid ActualizarTopicoDTO datos) {
+
+        var topicoActualizado = topicoService.actualizarTopico(id, datos);
+        var respuesta = new DatosRespuestaTopicoDTO(topicoActualizado);
 
         return ResponseEntity.ok(respuesta);
     }

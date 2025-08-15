@@ -2,6 +2,7 @@ package com.foro_hub.foro_hub.domain.topico;
 
 import com.foro_hub.foro_hub.domain.curso.Curso;
 import jakarta.persistence.*;
+import jakarta.validation.Valid;
 import lombok.*;
 import java.time.LocalDateTime;
 
@@ -45,5 +46,20 @@ public class Topico {
         this.curso = curso;
         this.fechaCreacion = LocalDateTime.now();
         this.estado = EstadoTopico.ABIERTO;
+    }
+    
+    public void actualizarDatos(@Valid ActualizarTopicoDTO datos, Curso curso) {
+        if(datos.titulo() != null) {
+            this.titulo = datos.titulo();
+        }
+        if(datos.mensaje() != null) {
+            this.mensaje = datos.mensaje();
+        }
+        if(datos.autor() != null) {
+            this.autor = datos.autor();
+        }
+        if (datos.curso() != null) {
+            this.curso = curso;
+        }
     }
 }
