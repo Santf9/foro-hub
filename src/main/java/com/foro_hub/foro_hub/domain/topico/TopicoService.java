@@ -66,4 +66,14 @@ public class TopicoService {
         // Los cambios se sincronizan automáticamente al finalizar la transacción
         return topico;
     }
+    
+    @Transactional
+    public void eliminarTopico(Long id) {
+        // Verificar que el tópico existe antes de eliminarlo
+        var topico = topicoRepository.findById(id)
+                .orElseThrow(() -> new ValidacionException("No se encontró el tópico con ID: " + id));
+        
+        // Eliminar el tópico por ID
+        topicoRepository.deleteById(id);
+    }
 }
