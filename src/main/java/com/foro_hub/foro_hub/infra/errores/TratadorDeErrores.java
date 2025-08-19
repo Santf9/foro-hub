@@ -16,11 +16,13 @@ public class TratadorDeErrores {
         var errores = ex.getFieldErrors().stream()
                 .map(DatosErrorValidacion::new)
                 .toList();
+
         return ResponseEntity.badRequest().body(errores);
     }
 
     @ExceptionHandler(ValidacionException.class)
     public ResponseEntity<String> tratarErrorValidacionNegocio(ValidacionException ex) {
+
         return ResponseEntity.badRequest().body(ex.getMessage());
     }
 
