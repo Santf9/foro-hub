@@ -349,4 +349,4 @@ Todos los endpoints de tópicos requieren autenticación JWT válida:
 
 ---
 
-**Desarrollado con mucha predisposición usando Spring Boot**
+**Desarrollado con mucha predisposición y dedicación usando Spring Boot**
